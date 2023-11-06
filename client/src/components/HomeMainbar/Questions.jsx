@@ -7,7 +7,7 @@ const Questions = ({question}) => {
     return (
         <div className='display-question-container'>
             <div className='display-votes-ans'>
-                <p>{question.upVotes+question.downVotes}</p>
+                <p>{question.upVote.length+question.downVote.length}</p>
                 <p>votes</p>
             </div>
             <div className='display-votes-ans'>
@@ -24,9 +24,9 @@ const Questions = ({question}) => {
                             ))
                         }
                     </div>
-                <p className='display-time'>
-                    asked {moment(question.askedOn).fromNow()} By {question.userPosted}
-                </p>
+                    <p className="display-time">
+            asked {moment(question.askedOn).fromNow()} {question.userPosted}
+          </p>
                 </div>
             </div>
         </div>

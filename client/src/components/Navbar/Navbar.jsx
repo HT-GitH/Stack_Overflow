@@ -40,9 +40,9 @@ const Navbar = () => {
           <Link to='/' className='nav-item nav-logo'>
             <img src={logo} alt='logo' />
           </Link>
-          <Link to='/' className='nav-item nav-btn'>About</Link>
-          <Link to='/' className='nav-item nav-btn'>Products</Link>
-          <Link to='/' className='nav-item nav-btn'>For Teams</Link>
+          <button className='nav-item nav-btn'>About</button>
+          <button  className='nav-item nav-btn'>Products</button>
+          <button  className='nav-item nav-btn'>For Teams</button>
 
           <form>
             <input type='text' placeholder='Search..' />
@@ -52,7 +52,7 @@ const Navbar = () => {
           {User===null ?
             <Link to='/Auth' className='nav-item nav-links'>Log in</Link>:
             <>
-              <Avatar backgroundColor='#009dff' px='10px' py='7px' borderRadius='50%' color='white' cursor='pointer' ><Link to='/User' style={{ textDecoration: 'none',color:'white' }} className=''> {User.result.name.charAt(0).toUpperCase()}</Link></Avatar>
+              <Avatar backgroundColor='#009dff' px='10px' py='7px' borderRadius='50%' color='white' cursor='pointer' ><Link to='https://lottie.host/?file=3e01d108-f66a-49b6-a1f5-7bcdd9df8047/aqpeqUIYTI.json' style={{ textDecoration: 'none',color:'white' }} className=''> {User.result.name.charAt(0).toUpperCase()}</Link></Avatar>
               <button className='nav-item nav-links' onClick = {handleLogout}>Log Out</button>
             </>  
           }

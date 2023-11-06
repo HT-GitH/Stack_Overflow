@@ -17,13 +17,13 @@ app.get('/',(req,res) => {
     res.send("This is a stack overflow clone API")
 })
 
+
 app.use('/user',userRoutes)
 app.use('/questions',questionRoutes)
 app.use("/answer", answerRoutes);
 
 
-
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT||5000
 const DATABASE_URL=process.env.CONNECTION_URL
 
 mongoose.connect(DATABASE_URL, { useNewUrlParser: true,useUnifiedTopology:true})

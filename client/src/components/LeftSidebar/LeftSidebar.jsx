@@ -19,11 +19,11 @@ const LeftSidebar = () => {
               <img src={Globe} alt="Globe" />
               <p style={{ paddingLeft: "10px" }}> Questions </p>
             </NavLink>
-            <NavLink to="/Tags" className="side-nav-links" activeclassname="active"
+            <NavLink to="https://lottie.host/?file=3e01d108-f66a-49b6-a1f5-7bcdd9df8047/aqpeqUIYTI.json" className="side-nav-links" activeclassname="active"
               style={{ paddingLeft: "40px" }}>
               <p>Tags</p>
             </NavLink>
-            <NavLink to="/Users" className="side-nav-links" activeclassname="active"
+            <NavLink to="https://lottie.host/?file=3e01d108-f66a-49b6-a1f5-7bcdd9df8047/aqpeqUIYTI.json" className="side-nav-links" activeclassname="active"
               style={{ paddingLeft: "40px" }}>
               <p>Users</p>
             </NavLink>

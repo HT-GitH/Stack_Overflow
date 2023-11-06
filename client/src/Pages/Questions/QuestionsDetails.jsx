@@ -2,14 +2,14 @@ import React, {useState} from 'react'
 import {useParams,Link,useNavigate,useLocation} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import copy from "copy-to-clipboard";
-
+import moment from 'moment'
 
 import upvote from '../../Assets/sort-up.svg'
 import downvote from '../../Assets/sort-down.svg'
 import Avatar from '../../components/Avatar/Avatar'
 import './Questions.css'
 import DisplayAnswer from './DisplayAnswer'
-import {postAnswer} from "../../actions/question";
+import {postAnswer,deleteQuestion,voteQuestion} from "../../actions/question";
 
 const QuestionsDetails = () => {
     let { id }= useParams();
@@ -37,6 +37,7 @@ const QuestionsDetails = () => {
                 noOfAnswers: answerLength + 1,
                 answerBody: Answer,
                 userAnswered: User.result.name,
+                userId:User.result._id
               })
             );
             
@@ -48,6 +49,28 @@ const QuestionsDetails = () => {
       copy(url + location.pathname);
       alert("Copied url : " + url + location.pathname);
     };  
+    
+    const handleDelete = () => {
+      dispatch(deleteQuestion(id, Navigate));
+    };
+
+    const handleUpVote = () => {
+      if (User === null) {
+        alert("Login or Signup to up vote a question");
+        Navigate("/Auth");
+      } else {
+        dispatch(voteQuestion(id, "upVote"));
+      }
+    };
+  
+    const handleDownVote = () => {
+      if (User === null) {
+        alert("Login or Signup to down vote a question");
+        Navigate("/Auth");
+      } else {
+        dispatch(voteQuestion(id, "downVote"));
+      }
+    };
 
   return (
     <div className='question-details-page'>
@@ -63,9 +86,9 @@ const QuestionsDetails = () => {
                         <h1> {question.questionTitle}</h1>
                         <div className ='question-details-container-2'>
                             <div className='question-votes'>
-                                <img src={upvote} alt="" width='18' />
-                                <p>{question.upVotes-question.downVotes}</p>
-                                <img src={downvote} alt="" width='18' />
+                                <img src={upvote} alt="" className="votes-icon" width='18' onClick={handleUpVote} />
+                                <p>{question.upVote.length - question.downVote.length}</p>
+                                <img src={downvote} alt="" className="votes-icon" width='18' onClick={handleDownVote}/>
                             </div>
                             <div style={{width:"100%"}}>
                                 <p className='question-body'>{question.questionBody}</p>
@@ -79,12 +102,13 @@ const QuestionsDetails = () => {
                                 <div className='question-action-user'>
                                     <div>
                                         <button type='button' onClick={handleShare}>Share</button>
-                                        <button type='button'>Delete</button>
+                                        {User?.result?._id === question?.userId && (
+                                        <button type="button" onClick={handleDelete}> Delete </button>)}
                                     </div>
                                     <div>
-                                        <p>asked {question.askedOn}</p>
+                                        <p>asked {moment(question.askedOn).fromNow()} by {question.userPosted}</p>
                                         <Link to={`/User/${question.userId}`} className='user-link' style={{color:'#0086d8'}}>
-                                        <Avatar backgroundColor="orange" px="8px" py="5py">{question.userPosted.charAt(0).toUpperCase()}</Avatar>
+                                        <Avatar backgroundColor="orange" px="8px" py="5px" borderRadius="4px">{question.userPosted.charAt(0).toUpperCase()}</Avatar>
                                         <div>
                                             {question.userPosted}
                                         </div>

@@ -23,7 +23,7 @@ const AskQuestion = () => {
         if (questionTitle && questionBody && questionTags){
             e.preventDefault();
             console.log({questionTitle, questionBody, questionTags, userPosted: User.result.name})
-            dispatch(askQuestion({questionTitle, questionBody, questionTags, userPosted: User.result.name},navigate))
+            dispatch(askQuestion({questionTitle, questionBody, questionTags, userPosted: User.result.name, userId:User?.result?._id},navigate))
     }else alert("Please enter all the fields")
     }
             
